@@ -1,0 +1,184 @@
+/* Plastic Navy — Kayak Log styles */
+/* Navy #1B3A6B / Gold #C8920A / Lora + DM Sans */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  background: #f5f1e8;
+  color: #14302b;
+  min-height: 100vh;
+}
+
+#app { min-height: 100vh; }
+
+/* ── Nav ── */
+.nav {
+  background: #1B3A6B;
+  padding: 0.9rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-title {
+  font-family: 'Lora', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+.nav-title span { color: #C8920A; }
+
+/* ── Screen ── */
+.screen { padding: 1.25rem; max-width: 640px; margin: 0 auto; }
+
+/* ── Loading / Spinner ── */
+.loading {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0.75rem; padding: 3rem; color: #5c685f; font-size: 0.9rem;
+}
+.spinner {
+  width: 20px; height: 20px;
+  border: 2px solid #ddd6c4;
+  border-top-color: #1B3A6B;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Buttons ── */
+.btn-primary {
+  display: inline-block; padding: 0.55rem 1.1rem;
+  background: #1B3A6B; color: #fff; border: none;
+  border-radius: 6px; font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+}
+.btn-primary:hover { background: #254d8f; }
+
+.btn-secondary {
+  display: inline-block; padding: 0.55rem 1.1rem;
+  background: #fff; color: #1B3A6B;
+  border: 1px solid #1B3A6B; border-radius: 6px;
+  font-size: 0.9rem; font-weight: 600; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-secondary:hover { background: #f0f4ff; }
+
+.btn-danger {
+  display: inline-block; padding: 0.55rem 1.1rem;
+  background: #fff; color: #a33;
+  border: 1px solid #a33; border-radius: 6px;
+  font-size: 0.9rem; font-weight: 600; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-danger:hover { background: #fdf3f2; }
+
+/* ── Kayak Header ── */
+.kayak-header { margin-bottom: 1.5rem; }
+.kayak-header h1 { font-family: 'Lora', serif; color: #1B3A6B; margin: 0.25rem 0 0.5rem; }
+.kayak-tagline { color: #5c685f; font-size: 0.9rem; line-height: 1.5; max-width: 46ch; }
+.kayak-back-link { display: inline-block; color: #C8920A; font-size: 0.85rem; margin-bottom: 0.75rem; }
+.kayak-back-link:hover { text-decoration: underline; }
+.kayak-log-trip-btn { display: inline-block; margin-top: 0.75rem; }
+
+/* ── Trip List ── */
+.kayak-trip-count { font-size: 0.8rem; color: #5c685f; margin-bottom: 0.75rem; }
+.kayak-loading { text-align: center; padding: 2rem; color: #5c685f; }
+.kayak-error { text-align: center; padding: 2rem; color: #a33; }
+.kayak-empty {
+  text-align: center; padding: 2rem 1rem; color: #8a9189;
+  font-size: 0.9rem; border: 1px dashed #ddd6c4; border-radius: 10px;
+}
+
+.kayak-trip {
+  background: #fff; border: 1px solid #ddd6c4; border-left: 4px solid #1B3A6B;
+  border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 0.75rem; cursor: pointer;
+}
+.kayak-trip:hover { border-left-color: #C8920A; }
+.kayak-trip-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; }
+.kayak-trip-river { font-family: 'Lora', serif; font-weight: 600; font-size: 1.05rem; color: #1B3A6B; }
+.kayak-trip-when { font-size: 0.8rem; color: #5c685f; margin-top: 0.15rem; }
+.kayak-trip-stars { color: #C8920A; font-size: 0.9rem; white-space: nowrap; }
+
+.kayak-trip-readings { display: flex; gap: 1.25rem; margin-top: 0.75rem; }
+.kayak-reading-label { display: block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; color: #5c685f; }
+.kayak-reading-value { font-size: 1.1rem; font-weight: 600; color: #1B3A6B; }
+.kayak-reading-value small { font-size: 0.7rem; font-weight: 400; color: #5c685f; }
+
+.kayak-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.75rem; }
+.kayak-badge { font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 20px; border: 1px solid currentColor; }
+.kayak-badge-kayaker { color: #C8920A; }
+.kayak-badge-beginner { color: #2e7d4f; }
+.kayak-badge-total { color: #5c685f; }
+.kayak-trip-notes { font-size: 0.85rem; color: #3d4a40; font-style: italic; margin-top: 0.6rem; }
+
+/* ── Card / Form ── */
+.kayak-card { background: #fff; border: 1px solid #ddd6c4; border-radius: 10px; padding: 1.25rem; }
+.kayak-detail-card h1 { margin-top: 0; }
+.kayak-detail-readings { margin: 1rem 0; }
+.kayak-detail-meta { font-size: 0.85rem; color: #5c685f; margin: 0.5rem 0; }
+.kayak-detail-gauge { font-size: 0.75rem; margin-top: 1rem; }
+
+.kayak-location-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.kayak-tab {
+  flex: 1; padding: 0.5rem; border: 1px solid #ddd6c4; border-radius: 6px;
+  background: #f5f1e8; font-size: 0.8rem; color: #5c685f; cursor: pointer;
+}
+.kayak-tab.active { background: #1B3A6B; color: #fff; border-color: #1B3A6B; }
+
+.kayak-row { display: flex; gap: 0.75rem; }
+.kayak-row > div { flex: 1; }
+.kayak-card label {
+  display: block; font-size: 0.7rem; text-transform: uppercase;
+  letter-spacing: 0.05em; color: #5c685f; margin: 0.75rem 0 0.25rem;
+}
+.kayak-card label:first-of-type { margin-top: 0; }
+.kayak-card input, .kayak-card textarea {
+  width: 100%; padding: 0.55rem 0.65rem; border: 1px solid #ddd6c4;
+  border-radius: 6px; font-size: 0.9rem; font-family: 'DM Sans', sans-serif;
+}
+.kayak-card textarea { min-height: 60px; resize: vertical; }
+
+.kayak-geo-btn, .kayak-find-btn { width: 100%; margin-top: 0.5rem; }
+.kayak-hint { font-size: 0.75rem; margin-top: 0.4rem; line-height: 1.5; color: #5c685f; min-height: 1rem; }
+.kayak-hint-ok { color: #2e7d4f; }
+.kayak-hint-err { color: #a33; }
+
+.kayak-match-card {
+  display: none; margin-top: 0.6rem; padding: 0.7rem 0.85rem; border-radius: 6px;
+  background: #f5f1e8; border-left: 3px solid #C8920A; font-size: 0.8rem; line-height: 1.5;
+}
+.kayak-match-card.show { display: block; }
+.kayak-match-card b { color: #1B3A6B; }
+
+.kayak-details { margin-top: 1rem; }
+.kayak-details summary {
+  font-size: 0.75rem; text-transform: uppercase;
+  letter-spacing: 0.05em; color: #5c685f; cursor: pointer;
+}
+
+.kayak-stars { display: flex; gap: 0.3rem; margin-top: 0.4rem; }
+.kayak-star { font-size: 1.4rem; color: #ddd6c4; cursor: pointer; }
+.kayak-star.lit { color: #C8920A; }
+
+.kayak-form-error {
+  margin-top: 0.75rem; padding: 0.6rem 0.75rem; border-radius: 6px;
+  background: #fdf3f2; border: 1px solid #a3333344; color: #a33; font-size: 0.8rem;
+}
+.kayak-form-ok {
+  margin-top: 0.75rem; padding: 0.6rem 0.75rem; border-radius: 6px;
+  background: #eaf5ee; border: 1px solid #2e7d4f33; color: #2e7d4f; font-size: 0.8rem;
+}
+
+.kayak-submit-btn { width: 100%; margin-top: 1.25rem; }
+.kayak-delete-btn {
+  margin-top: 1.5rem; width: 100%; padding: 0.6rem; background: #fff; color: #a33;
+  border: 1px solid #a33; border-radius: 6px; font-size: 0.85rem; cursor: pointer;
+}
+.kayak-delete-btn:hover { background: #fdf3f2; }
