@@ -116,6 +116,9 @@ body {
 .kayak-badge-kayaker { color: #C8920A; }
 .kayak-badge-beginner { color: #2e7d4f; }
 .kayak-badge-total { color: #5c685f; }
+.kayak-badge-water { color: #1B3A6B; }
+.kayak-badge-safe { color: #2e7d4f; background: #eaf5ee; border-color: #2e7d4f55; }
+.kayak-badge-unsafe { color: #a33; background: #fdf3f2; border-color: #a3333355; }
 .kayak-trip-notes { font-size: 0.85rem; color: #3d4a40; font-style: italic; margin-top: 0.6rem; }
 
 /* ── Card / Form ── */
@@ -162,6 +165,17 @@ body {
   font-size: 0.75rem; text-transform: uppercase;
   letter-spacing: 0.05em; color: #5c685f; cursor: pointer;
 }
+
+/* Segmented survey controls */
+.kayak-seg { display: flex; gap: 0.5rem; }
+.kayak-seg-btn {
+  flex: 1; padding: 0.5rem; border: 1px solid #ddd6c4; border-radius: 6px;
+  background: #f5f1e8; font-size: 0.8rem; color: #5c685f; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+.kayak-seg-btn.active { background: #1B3A6B; color: #fff; border-color: #1B3A6B; }
+
+.kayak-edit-btn { margin-top: 1.5rem; width: 100%; }
 
 .kayak-stars { display: flex; gap: 0.3rem; margin-top: 0.4rem; }
 .kayak-star { font-size: 1.4rem; color: #ddd6c4; cursor: pointer; }

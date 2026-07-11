@@ -75,6 +75,8 @@ function renderTripCard(t) {
         <span class="kayak-badge kayak-badge-kayaker">${t.kayakers || 0} kayaker${t.kayakers === 1 ? '' : 's'}</span>
         <span class="kayak-badge kayak-badge-beginner">${t.beginners || 0} beginner${t.beginners === 1 ? '' : 's'}</span>
         <span class="kayak-badge kayak-badge-total">${total} total</span>
+        ${t.miles_paddled != null ? `<span class="kayak-badge kayak-badge-total">${t.miles_paddled} mi</span>` : ''}
+        ${t.water_level ? `<span class="kayak-badge kayak-badge-water">${escapeHtml(t.water_level)}</span>` : ''}
       </div>
       ${t.notes ? `<div class="kayak-trip-notes">"${escapeHtml(t.notes)}"</div>` : ''}
     </div>

@@ -5,7 +5,7 @@ import { renderKayakDetail } from './kayak-detail.js'
 
 // ── State ──────────────────────────────────────────────────────────────────
 const state = {
-  screen: 'kayak-list', // 'kayak-list' | 'kayak-add' | 'kayak-detail'
+  screen: 'kayak-list', // 'kayak-list' | 'kayak-add' | 'kayak-detail' | 'kayak-edit'
   currentKayakTripId: null,
 }
 
@@ -40,11 +40,27 @@ function render() {
     })
   }
 
-  if (state.screen === 'kayak-detail' && state.currentKayakTripId) {
-    renderKayakDetail(container, state.currentKayakTripId, () => {
-      state.screen = 'kayak-list'
+  if (state.screen === 'kayak-edit' && state.currentKayakTripId) {
+    renderKayakAdd(container, () => {
+      state.screen = 'kayak-detail'
       render()
-    })
+    }, state.currentKayakTripId)
+  }
+
+  if (state.screen === 'kayak-detail' && state.currentKayakTripId) {
+    renderKayakDetail(
+      container,
+      state.currentKayakTripId,
+      () => {
+        state.screen = 'kayak-list'
+        render()
+      },
+      () => {
+        state.screen = 'kayak-edit'
+        render()
+        window.scrollTo(0, 0)
+      }
+    )
   }
 }
 

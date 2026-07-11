@@ -1,10 +1,9 @@
 // src/kayak-detail.js
-// Single trip detail view, with delete. Mirrors detail.js's pattern of
-// reading an id from the route and rendering a read-only card.
+// Single trip detail view, with edit + delete.
 
 import { supabase } from './supabase.js';
 
-export async function renderKayakDetail(container, tripId, onBack) {
+export async function renderKayakDetail(container, tripId, onBack, onEdit) {
   container.innerHTML = `<p class="kayak-loading">Loading trip…</p>`;
 
   const { data: trip, error } = await supabase
@@ -18,7 +17,7 @@ export async function renderKayakDetail(container, tripId, onBack) {
       <span class="kayak-back-link kayak-back-trigger" style="cursor:pointer">&larr; Back to log</span>
       <p class="kayak-error">Couldn't load that trip${error ? `: ${error.message}` : ''}.</p>
     `;
-    container.querySelectorAll('.kayak-back-trigger').forEach(el => el.addEventListener('click', onBack));
+    container.querySelector('.kayak-back-trigger').addEventListener('click', onBack);
     return;
   }
 
@@ -28,6 +27,11 @@ export async function renderKayakDetail(container, tripId, onBack) {
   });
   const stars = trip.rating ? '★'.repeat(trip.rating) + '☆'.repeat(5 - trip.rating) : '';
   const total = (trip.kayakers || 0) + (trip.beginners || 0);
+
+  const surveyBits = [];
+  if (trip.miles_paddled != null) surveyBits.push(`<span class="kayak-badge kayak-badge-total">${trip.miles_paddled} mi paddled</span>`);
+  if (trip.water_level) surveyBits.push(`<span class="kayak-badge kayak-badge-water">Water: ${escapeHtml(trip.water_level)}</span>`);
+  if (trip.felt_safe != null) surveyBits.push(`<span class="kayak-badge ${trip.felt_safe ? 'kayak-badge-safe' : 'kayak-badge-unsafe'}">${trip.felt_safe ? 'Felt safe' : 'Felt unsafe'}</span>`);
 
   container.innerHTML = `
     <span class="kayak-back-link kayak-back-trigger" style="cursor:pointer">&larr; Back to log</span>
@@ -47,17 +51,23 @@ export async function renderKayakDetail(container, tripId, onBack) {
         <span class="kayak-badge kayak-badge-total">${total} total</span>
       </div>
 
+      ${surveyBits.length ? `<div class="kayak-badges">${surveyBits.join('')}</div>` : ''}
+
       ${trip.duration ? `<p class="kayak-detail-meta"><strong>Duration:</strong> ${escapeHtml(trip.duration)}</p>` : ''}
       ${trip.notes ? `<p class="kayak-trip-notes">"${escapeHtml(trip.notes)}"</p>` : ''}
 
-      <p class="kayak-detail-meta kayak-detail-gauge">USGS-${trip.gauge_id} · ${trip.distance_mi != null ? trip.distance_mi.toFixed(1) + ' mi from logged location' : ''}</p>
+      ${trip.gauge_id
+        ? `<p class="kayak-detail-meta kayak-detail-gauge">USGS-${escapeHtml(trip.gauge_id)}${trip.distance_mi != null ? ` · ${Number(trip.distance_mi).toFixed(1)} mi from logged location` : ''}</p>`
+        : `<p class="kayak-detail-meta kayak-detail-gauge">No gauge — logged manually</p>`}
 
+      <button class="btn-secondary kayak-edit-btn" id="kayak-edit-btn" type="button">Edit this trip</button>
       <button class="btn-danger kayak-delete-btn" id="kayak-delete-btn" type="button">Delete this trip</button>
       <div id="kayak-detail-msg"></div>
     </div>
   `;
 
   container.querySelectorAll('.kayak-back-trigger').forEach(el => el.addEventListener('click', onBack));
+  container.querySelector('#kayak-edit-btn').addEventListener('click', onEdit);
 
   container.querySelector('#kayak-delete-btn').addEventListener('click', async () => {
     if (!confirm('Delete this trip? This can\'t be undone.')) return;
