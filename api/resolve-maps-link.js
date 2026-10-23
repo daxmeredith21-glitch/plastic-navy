@@ -4,7 +4,7 @@
 // CommonJS serverless function that proxies the AI call server-side so the
 // API key never reaches the browser, and so the fetch isn't blocked by CORS.
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   // CORS — allow calls from the deployed app
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
